@@ -2,30 +2,35 @@ if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 }
 
-async function successCallback(position) {
-  var latitude = position.coords.latitude;
-  var longitude = position.coords.longitude;
-  console.log("Latitude: " + latitude + ", Longitude: " + longitude);
-  const retornoAPI = await requestAPI(latitude, longitude);
+async function requestAPI(lat, lon) {
+  try {
+    const reponse = await fetch(
+      `http://api.weatherapi.com/v1/forecast.json?key=54e94c17fdab44f4beb132817231506&q=${
+        lat + "," + lon
+      }&lang=pt&days=1&aqi=no&alerts=no`
+    );
+    const infoClima = await reponse.json();
 
-  let name = retornoAPI.name;
-  let temp = retornoAPI.temperatura;
-  let chuva = retornoAPI.chuva * 100 + '%';
-  let condic = retornoAPI.condition;
-  let sens = retornoAPI.sensation;
+    const infoUtil = {
+      name: infoClima.location.name,
+      temperatura: infoClima.current.temp_c,
+      max: infoClima.forecast.forecastday[0].day.maxtemp_c,
+      min: infoClima.forecast.forecastday[0].day.mintemp_c,
+      chuva: infoClima.current.precip_mm,
+      condition: infoClima.current.condition.text,
+      sensation: infoClima.current.feelslike_c,
+    };
 
-  let pCity = document.getElementById("nomeCity");
-  let pTemp = document.getElementById("tempAtual");
-  let pChuva = document.getElementById("percRain");
-  let pSensi = document.getElementById("sensTemp");
-  let pCondic = document.getElementById("condicTemp");
+    console.log(infoClima);
+    console.log(infoUtil);
 
-  pCity.innerText = name;
-  pTemp.innerText = temp;
-  pChuva.innerText= chuva
-  pSensi.innerText = sens;
-  pCondic.innerText = condic;
+
+    return infoUtil;
+  } catch (error) {
+    console.log("Erro na execução");
+  }
 }
+
 function errorCallback(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
@@ -45,26 +50,33 @@ function errorCallback(error) {
   }
 }
 
-async function requestAPI(lat, lon) {
-  try {
-    const reponse = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=54e94c17fdab44f4beb132817231506&q=${
-        lat + "," + lon
-      }&lang=pt`
-    );
-    const infoClima = await reponse.json();
+async function successCallback(position) {
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+  const retornoAPI = await requestAPI(latitude, longitude);
 
-    const infoUtil = {
-      name: infoClima.location.name,
-      temperatura: infoClima.current.temp_c,
-      chuva: infoClima.current.precip_mm,
-      condition: infoClima.current.condition.text,
-      sensation: infoClima.current.feelslike_c,
-    };
-    console.log(infoClima);
-    console.log(infoUtil);
-    return infoUtil;
-  } catch (error) {
-    console.log("Erro na execução");
-  }
+  let name = retornoAPI.name;
+  let temp = retornoAPI.temperatura;
+  let max = retornoAPI.max;
+  let min = retornoAPI.min;
+  let chuva = retornoAPI.chuva + "%";
+  let condic = retornoAPI.condition;
+  let sens = retornoAPI.sensation;
+
+  let pCity = document.getElementById("nomeCity");
+  let pTemp = document.getElementById("tempAtual");
+  let pmaxTemp = document.getElementById("tempMax");
+  let pminTemp = document.getElementById("tempMin");
+  let pChuva = document.getElementById("percRain");
+  let pSensi = document.getElementById("sensTemp");
+  let pCondic = document.getElementById("condicTemp");
+
+  pCity.innerText = name;
+  pTemp.innerText = temp;
+  pmaxTemp.innerText = max;
+  pminTemp.innerText = min;
+  pChuva.innerText = chuva;
+  pSensi.innerText = sens;
+  pCondic.innerText = condic;
 }

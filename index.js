@@ -16,7 +16,7 @@ async function requestAPI(lat, lon) {
       temperatura: infoClima.current.temp_c,
       max: infoClima.forecast.forecastday[0].day.maxtemp_c,
       min: infoClima.forecast.forecastday[0].day.mintemp_c,
-      chuva: infoClima.current.precip_mm,
+      chuva: infoClima.forecast.forecastday[0].day.daily_chance_of_rain,
       condition: infoClima.current.condition.text,
       sensation: infoClima.current.feelslike_c,
     };

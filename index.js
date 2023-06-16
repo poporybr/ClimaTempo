@@ -5,7 +5,7 @@ if (navigator.geolocation) {
 async function requestAPI(lat, lon) {
   try {
     const reponse = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=54e94c17fdab44f4beb132817231506&q=${
+      `https://api.weatherapi.com/v1/forecast.json?key=54e94c17fdab44f4beb132817231506&q=${
         lat + "," + lon
       }&lang=pt&days=1&aqi=no&alerts=no`
     );

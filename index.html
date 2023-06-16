@@ -4,19 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>beta o-tempo</title>
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="containerMain" class="containerMain">
-      <div>
-        <p>Cidade: <span id="nomeCity">Carregando...</span></p>
-        <p>Temperatura: <span id="tempAtual">Carregando...</span></p>
-        <p>Max: <span id="tempMax">Carregando...</span></p>
-        <p>Min: <span id="tempMin">Carregando...</span></p>
-        <p>Chance de Chuva: <span id="percRain">Carregando...</span></p>
-        <p>Sensação Termica: <span id="sensTemp">Carregando...</span></p>
-        <p>Condição do Tempo: <span id="condicTemp">Carregando...</span></p>
+      <p id="nomeCity"></p>
+      <div id="sectionOne">
+        <h1 id="tempAtual"></h1>
+        <img id="iconTemp">
       </div>
+      <div id="sectionTwo">
+        <p>Min: <span id="tempMin"></span></p>
+        <p>Max: <span id="tempMax"></span></p>
+      </div>
+      <p id="condicTemp"></p>
     </div>
   </body>
 </html>

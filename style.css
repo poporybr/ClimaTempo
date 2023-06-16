@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: rgb(227, 223, 223);
+}
+
+#containerMain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#nomeCity{
+    font-size: 18px;
+}
+
+#sectionOne{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+#iconTemp{
+    width: 46px;
+    height: 46px;
+}
+
+#sectionTwo{
+    display: flex;
+    gap: 6px;
+}

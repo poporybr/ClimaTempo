@@ -13,12 +13,11 @@ async function requestAPI(lat, lon) {
 
     const infoUtil = {
       name: infoClima.location.name,
-      temperatura: infoClima.current.temp_c,
-      max: infoClima.forecast.forecastday[0].day.maxtemp_c,
-      min: infoClima.forecast.forecastday[0].day.mintemp_c,
-      chuva: infoClima.forecast.forecastday[0].day.daily_chance_of_rain,
+      temperatura: infoClima.current.temp_c + '°',
+      max: infoClima.forecast.forecastday[0].day.maxtemp_c + '°',
+      min: infoClima.forecast.forecastday[0].day.mintemp_c + '°',
       condition: infoClima.current.condition.text,
-      sensation: infoClima.current.feelslike_c,
+      iconCondition: infoClima.current.condition.icon,
     };
 
     console.log(infoClima);
@@ -60,23 +59,22 @@ async function successCallback(position) {
   let temp = retornoAPI.temperatura;
   let max = retornoAPI.max;
   let min = retornoAPI.min;
-  let chuva = retornoAPI.chuva + "%";
   let condic = retornoAPI.condition;
-  let sens = retornoAPI.sensation;
+  let icon = "https:" + retornoAPI.iconCondition;
 
   let pCity = document.getElementById("nomeCity");
   let pTemp = document.getElementById("tempAtual");
   let pmaxTemp = document.getElementById("tempMax");
   let pminTemp = document.getElementById("tempMin");
-  let pChuva = document.getElementById("percRain");
-  let pSensi = document.getElementById("sensTemp");
   let pCondic = document.getElementById("condicTemp");
+  let imagemTempo = document.getElementById('iconTemp');
 
   pCity.innerText = name;
   pTemp.innerText = temp;
   pmaxTemp.innerText = max;
   pminTemp.innerText = min;
-  pChuva.innerText = chuva;
-  pSensi.innerText = sens;
   pCondic.innerText = condic;
+  imagemTempo.setAttribute("src", icon)
+
+  console.log(icon)
 }

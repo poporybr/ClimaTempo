@@ -14,8 +14,8 @@ async function requestAPI(lat, lon) {
     const infoUtil = {
       name: infoClima.location.name,
       temperatura: infoClima.current.temp_c + '°',
-      max: infoClima.forecast.forecastday[0].day.maxtemp_c + '°',
-      min: infoClima.forecast.forecastday[0].day.mintemp_c + '°',
+      max: 'Max: ' + infoClima.forecast.forecastday[0].day.maxtemp_c + '°',
+      min: 'Min: ' + infoClima.forecast.forecastday[0].day.mintemp_c + '°',
       condition: infoClima.current.condition.text,
       iconCondition: infoClima.current.condition.icon,
     };

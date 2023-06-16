@@ -27,7 +27,7 @@ async function requestAPI(lat, lon) {
 
     return infoUtil;
   } catch (error) {
-    console.log("Erro na execução");
+    alert("Erro na chamada API");
   }
 }
 
